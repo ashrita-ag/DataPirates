@@ -1,0 +1,54 @@
+
+body 
+{
+	display: grid;
+	grid-template-columns: 75% 25%;
+	grid-template-rows: 100vh;
+	margin: 0 0;
+	color: #cdd1d1;
+}
+
+
+main 
+{
+	background-image: linear-gradient(to bottom right, #ffffff, #007791);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+aside 
+{
+	background:#262929;
+	display: grid;
+	align-items: top;
+	grid-template-rows : 5vh;
+	justify-content: center;
+	padding : 8px;
+}
+
+.algohead
+{
+	text-align:left;
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #ffffff;
+
+}
+#gridSize
+{
+	text-align: left;
+}
+
+.box 
+{ 
+	border : 1px dotted #a5adad ;
+	padding : 1.3vmin 1.3vmin ;
+	background-color: #ffffff;
+ }
+
+ .footer
+ {
+ 	margin: auto; 
+ 	padding: 20px;
+ }
