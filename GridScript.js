@@ -5,8 +5,8 @@ var open = [];			// the common array for algo files
 var close = [];			// the common array for algo files
 var path = [];			// the common array of path required for algo files
 
-var rows = 42;			//initial declaration of rows and columns with maximum size
-var cols = 60;
+var rows = 34;			//initial declaration of rows and columns with maximum size
+var cols = 55;
 
 var actionFlag = 'W';		//to determine which action has to be performed on clicking of grid elements
 var selectedAlgo = 1;		//specify which algo is selected for searching
@@ -21,11 +21,9 @@ var count_of_search = 0;		//keeping a count of how many times search button has 
 var bi = '';
 
 document.addEventListener("DOMContentLoaded", function(event) { changeGridSize(); });
-//document.getElemnetById("resetGrid").addEventListener("click", function(){ changeGridSize(); });	 					//create the grid when the content loading is complete
 document.getElementById("Starting point").addEventListener("click", function(){ setActionFlag('S'); });				//setting the action-flag using buttons provided
 document.getElementById("Ending point").addEventListener("click", function(){ setActionFlag('E'); });
 document.getElementById("Walls").addEventListener("click", function(){ setActionFlag('W'); });
-//document.getElementById("Start search").addEventListener("click",function(){ count_of_search++; selectAlgo(); pathfinding();}); //increment the count_of_search, check the algo, start search 
 
 function setActionFlag(f) {
 	actionFlag=f;
@@ -44,10 +42,9 @@ function setActionFlag(f) {
 	}
 }
 
-function instructionsAlert() {			//Instructions for the page
-	
+function instructionsAlert() 
+{	
 	alert("1) Use given buttons to specify the required points in the grid.\n2) Green point indicate the starting point.\n3) Red point indicates the end point.\n4) Choose an algorithm from the given panel. \n5) Click on 'Let\'s begin! to start the search.")
-
 }
 		
 function _createGrid() {				//create the grid according to specified number of rows and colmuns
@@ -74,9 +71,9 @@ function _createGrid() {				//create the grid according to specified number of r
 	start_j = 0;
 	end_i = i;
 	end_j = j;
-	document.getElementById( '0,0' ).style.backgroundColor = "green";		//show the initial starting point
+	document.getElementById( '0,0' ).style.backgroundColor = "#00ff22";		//show the initial starting point
 	let endPoint = '' + i + ',' + j ;
-	document.getElementById( endPoint ).style.backgroundColor = "red";		//show the initial destination point
+	document.getElementById( endPoint ).style.backgroundColor = "#ff0400";		//show the initial destination point
 	count_of_search = 0;		//search-count is 0 at the beginning for each grid
 	document.getElementById('startPoint').innerHTML = 'Starting from ' + start_i + ',' + start_j ;
 	document.getElementById('endPoint').innerHTML = 'Ending at ' + end_i + ',' + end_j;
@@ -122,34 +119,34 @@ function changeColorOfBox( i , j ) {
 	{
 		case 'S' : 
 			   if( i != end_i || j != end_j ) {			//if not destination point
-			   	   document.getElementById( ""+start_i+','+start_j ).style.backgroundColor = "rgba(200,200,200,0.2)";	//change previous starting point to open path
-				   document.getElementById( ""+i+','+j ).style.backgroundColor = "green";	//green starting point
+			   	   document.getElementById( ""+start_i+','+start_j ).style.backgroundColor = "#ffffff";	//change previous starting point to open path
+				   document.getElementById( ""+i+','+j ).style.backgroundColor = "#00ff22";	//green starting point
 				   start_i = i;									//set new starting coordinates
 				   start_j = j;
 			   }
 			   document.getElementById('startPoint').innerHTML = 'Starting from ' + start_i + ',' + start_j ;
-			   document.getElementById('coordinates').innerHTML = 'Pointing at ' + start_i + ',' + start_j + ' with value ' + array[start_i][start_j] ;
+			   document.getElementById('coordinates').innerHTML = 'Start Point at (' + start_i + ',' + start_j+")" ;
 			   break;
 		case 'E' : 
 			   if( i != start_i || j != start_j ) {			//if not starting point
-			   	   document.getElementById( ""+end_i+','+end_j ).style.backgroundColor = "rgba(200,200,200,0.2)";	//change previous destination point to open path
-				   document.getElementById( ""+i+','+j ).style.backgroundColor = "red";		//red destination point
+			   	   document.getElementById( ""+end_i+','+end_j ).style.backgroundColor = "#ffffff";	//change previous destination point to open path
+				   document.getElementById( ""+i+','+j ).style.backgroundColor = "#ff0400";		//red destination point
 				   end_i = i;									//set new destination point 
 				   end_j = j; 
 			   }
 			   document.getElementById('endPoint').innerHTML = 'Ending at ' + end_i + ',' + end_j;
-			   document.getElementById('coordinates').innerHTML = 'Pointing at ' + end_i + ',' + end_j + ' with value ' + array[end_i][end_j] ;
+			   document.getElementById('coordinates').innerHTML = 'End Point at (' + end_i + ',' + end_j +')';
 			   break;
 		case 'W' : 
 			   if( array[i][j] == 1)	//if a wall
 			   {	
-				document.getElementById( ""+i+','+j ).style.backgroundColor = "black";	//wall in black
+				document.getElementById( ""+i+','+j ).style.backgroundColor = "#262626";	//wall in black
 			   }
-			   else if( array[i][j] == 0 && ((i != start_i) || (j != start_j)) && ((i != end_i) || (j != end_j)))	// if not starting or destination point but simple open path
+			   else if( array[i][j] == 0 && !(i==start_i && j==start_j) && !(i==end_i && j==end_j))	// if not starting or destination point but simple open path
 			   {	
-				document.getElementById( ""+i+','+j ).style.backgroundColor = "rgba(200,200,200,0.2)";
+				document.getElementById( ""+i+','+j ).style.backgroundColor = "#ffffff";
 			   }
-			   document.getElementById('coordinates').innerHTML = 'Pointing at ' + i + ',' + j + ' with value ' + array[i][j] ;
+			   document.getElementById('coordinates').innerHTML = 'Obstacle at (' + i + ',' + j+')' ;
 			   break;
 		default :  array[i][j] = 0;
 	}
@@ -159,14 +156,14 @@ function changeGridSize() {		// on clicking 'set grid' new rows and columns are 
 
 	rows = document.getElementById("numberOfRows").value;
 	cols = document.getElementById("numberOfColumns").value;
-	if( rows > 42 || rows == 0 ) {
-		rows = 42;
+	if( rows > 34 || rows == 0 ) {
+		rows = 34;
 	}
 	if( rows < 2 ) {
 		rows = 2;
 	}
-	if( cols == 0 || cols > 60 ) {
-		cols = 60;
+	if( cols == 0 || cols > 55 ) {
+		cols = 55;
 	}
 	if( cols < 2 ) {
 		cols = 2;
@@ -198,7 +195,7 @@ function pathfinding() {
 		var s = path[i][0] + "," + path[i][1] ;
 		var cell = document.getElementById(s);
 		if( array[path[i][0]][path[i][1]] == 0)
-			cell.style.backgroundColor = "rgba(200,200,200,0.2)";
+			cell.style.backgroundColor = "#ffffff";
 	}
 	path = [];
 	open=[];
@@ -225,11 +222,11 @@ function pathfinding() {
 			var s = path[i][0] + ',' + path[i][1] ;
 			var cell = document.getElementById(s);
 			if(( (path[i][0] == start_i && path[i][1] == start_j ) || (path[i][0] == end_i && path[i][1] == end_j ) || (array[path[i][0]][path[i][1]] == 1)) == 0)	
-				cell.style.backgroundColor = "#FF69B4";							//if not starting/destination point or obstacle then change the color
+				cell.style.backgroundColor = "#f5ca53";	 //pathcolor						//if not starting/destination point or obstacle then change the color
 
 	}
-	document.getElementById( ""+start_i+','+start_j ).style.backgroundColor = "green";
-	document.getElementById( ""+end_i+','+end_j ).style.backgroundColor = "red";
+	document.getElementById( ""+start_i+','+start_j ).style.backgroundColor = "#00ff22";
+	document.getElementById( ""+end_i+','+end_j ).style.backgroundColor = "#ff0400";
 
 
 }
