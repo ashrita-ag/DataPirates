@@ -2,7 +2,7 @@
 Microsoft Codess Engage 2020
 ## PathFinding by DataPirates
 
-See the demo at : [DataPirates](https://dhvani1710.github.io/DataPirates/)
+See the demo at : [DataPirates](https://ashrita-ag.github.io/DataPirates/)
 
 ### Meet the Algorithms
 This application supports the following algorithms:
